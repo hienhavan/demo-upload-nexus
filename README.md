@@ -107,7 +107,6 @@ publishing {
 ```
 ## Upload Lên Nexus
 Chạy lệnh sau:
-
 ```sh
 gradle publish
 ```
@@ -115,3 +114,40 @@ gradle publish
 Dùng đúng loại repository:
 maven-snapshots chỉ dành cho SNAPSHOT (1.0.0-SNAPSHOT).
 gradle-snapshots cũng chỉ dành cho SNAPSHOT.
+
+## sủ dụng maven trong dự án khác 
+pom.xml thêm
+```xml
+<repositories>
+    <repository>
+        <id>nexus</id>
+        <url>http://localhost:8081/repository/maven-releases/</url>  <!-- Hoặc maven-snapshots nếu là SNAPSHOT -->
+    </repository>
+</repositories>
+```
+### Khai báo dependency cần dùng:
+```xml
+<dependency>
+    <groupId>com.example</groupId>
+    <artifactId>my-library</artifactId>
+    <version>1.0.0</version>  <!-- Nếu là SNAPSHOT thì phải có -SNAPSHOT -->
+</dependency>
+```
+
+## Sử dụng với Gradle
+### Thêm Nexus vào build.gradle của dự án mới:
+```
+repositories {
+    maven {
+        url = uri("http://localhost:8081/repository/gradle-releases/") // Hoặc gradle-snapshots nếu là SNAPSHOT
+        allowInsecureProtocol = true
+    }
+}
+```
+
+### Thêm dependency:
+```
+dependencies {
+    implementation 'com.example:my-library:1.0.0'  // Nếu SNAPSHOT thì thêm -SNAPSHOT
+}
+```
