@@ -2,7 +2,7 @@
 
 ## 📌 1. Cài Đặt & Chạy Nexus  
 
-### 1️⃣ Chạy Nexus bằng Docker  
+### Chạy Nexus bằng Docker  
 Tạo file `docker-compose.yml` với nội dung sau:  
 
 ```yaml
@@ -23,49 +23,21 @@ services:
 volumes:
   nexus-data:
     driver: local
-Chạy Nexus bằng lệnh:
-
-sh
-Sao chép
-Chỉnh sửa
+```
+### Chạy Nexus bằng lệnh:
+```sh
 docker-compose up -d
-Truy cập http://localhost:8081 để vào giao diện Nexus.
+```
 
-2️⃣ Lấy mật khẩu Admin mặc định
-Chạy lệnh sau để lấy mật khẩu:
-
-sh
-Sao chép
-Chỉnh sửa
+### Truy cập http://localhost:8081 để vào giao diện Nexus.
+## Lấy mật khẩu Admin mặc định
+```sh
 docker exec -it nexus cat /nexus-data/admin.password
-Đăng nhập với tài khoản:
-
-Username: admin
-Password: (lấy từ lệnh trên)
-📌 2. Cấu Hình Nexus Repository
-🔹 Tạo repository cho Maven
-Vào "Repositories" > "Create repository"
-Chọn "maven2 (hosted)"
-Nhập thông tin:
-Name: maven-snapshots
-Version policy: Snapshot
-Deployment policy: Allow redeploy
-Nhấn "Create repository"
-🔹 Tạo repository cho Gradle
-Vào "Repositories" > "Create repository"
-Chọn "maven2 (hosted)"
-Nhập thông tin:
-Name: gradle-snapshots
-Version policy: Snapshot
-Deployment policy: Allow redeploy
-Nhấn "Create repository"
-📌 3. Cấu Hình Maven
-1️⃣ Cấu hình settings.xml
-Mở file ~/.m2/settings.xml (hoặc C:\Users\<username>\.m2\settings.xml trên Windows) và thêm thông tin:
-
-xml
-Sao chép
-Chỉnh sửa
+```
+## Cấu Hình Maven
+### Cấu hình settings.xml
+Mở file /settings.xml và thêm thông tin:
+```xml
 <servers>
     <server>
         <id>nexus</id>
@@ -73,12 +45,9 @@ Chỉnh sửa
         <password>your-password</password>
     </server>
 </servers>
-2️⃣ Cấu hình pom.xml
-Thêm đoạn sau vào pom.xml:
-
-xml
-Sao chép
-Chỉnh sửa
+```
+## Cấu hình thêm đoạn mã vào file pom.xml
+```xml
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
@@ -92,20 +61,15 @@ Chỉnh sửa
         </snapshotRepository>
     </distributionManagement>
 </project>
-3️⃣ Build & Upload
-Chạy lệnh sau để đẩy lên Nexus:
-
-sh
-Sao chép
-Chỉnh sửa
+```
+## Build & Upload
+```sh
 mvn deploy
-📌 4. Cấu Hình Gradle
-1️⃣ Cấu hình build.gradle
+```
+```
+ Cấu hình build.gradle
 Thêm nội dung sau:
 
-gradle
-Sao chép
-Chỉnh sửa
 plugins {
     id 'java-library'
     id 'maven-publish'
@@ -140,13 +104,13 @@ publishing {
         }
     }
 }
-2️⃣ Upload Lên Nexus
+```
+## Upload Lên Nexus
 Chạy lệnh sau:
 
-sh
-Sao chép
-Chỉnh sửa
+```sh
 gradle publish
+```
 🎯 Lưu Ý Quan Trọng
 Dùng đúng loại repository:
 maven-snapshots chỉ dành cho SNAPSHOT (1.0.0-SNAPSHOT).
