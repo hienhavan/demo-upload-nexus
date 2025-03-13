@@ -66,10 +66,10 @@ Mở file /settings.xml và thêm thông tin:
 ```sh
 mvn deploy
 ```
-```
- Cấu hình build.gradle
-Thêm nội dung sau:
 
+## Cấu hình build.gradle
+Thêm nội dung sau:
+```
 plugins {
     id 'java-library'
     id 'maven-publish'
