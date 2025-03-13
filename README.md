@@ -1,6 +1,6 @@
-# 🚀 Hướng Dẫn Publish Maven & Gradle Lên Nexus  
+# Hướng Dẫn Publish Maven & Gradle Lên Nexus  
 
-## 📌 1. Cài Đặt & Chạy Nexus  
+## Cài Đặt & Chạy Nexus  
 
 ### Chạy Nexus bằng Docker  
 Tạo file `docker-compose.yml` với nội dung sau:  
@@ -111,7 +111,7 @@ Chạy lệnh sau:
 ```sh
 gradle publish
 ```
-🎯 Lưu Ý Quan Trọng
+## Lưu Ý Quan Trọng
 Dùng đúng loại repository:
 maven-snapshots chỉ dành cho SNAPSHOT (1.0.0-SNAPSHOT).
 gradle-snapshots cũng chỉ dành cho SNAPSHOT.
